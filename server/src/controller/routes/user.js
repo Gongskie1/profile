@@ -7,10 +7,9 @@ router.post(
     "/login",
     passport_local_strat.authenticate("local"),
     userController.create
-);
+)
 router.get(
-    "/home",
-    userController.getting
+    "/home", userController.getting
 )
 
 export default router;

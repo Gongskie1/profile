@@ -18,7 +18,7 @@ export default {
         res.send(req.user);
     },
     getting: async (req,res)=> {
-
-        req.send(req.user)
+        const user = req.user;
+        res.send(user)
     }
 }
