@@ -1,8 +1,19 @@
+import { CustomButtonTypes } from "../types"
 
-
-const Button = () => {
+const Button = ({
+btnName,
+btnClass,
+}:CustomButtonTypes
+) => {
   return (
-    <div>Button</div>
+    <>
+      <div>
+        <button 
+          className={btnClass}
+          >{btnName}
+        </button>
+      </div>
+    </>
   )
 }
 

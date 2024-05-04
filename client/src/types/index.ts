@@ -3,3 +3,8 @@ export interface CustomInputType{
     inputName:string;
     inputClass:string;
 }
+
+export interface CustomButtonTypes{
+    btnName:string;
+    btnClass:string;
+}
