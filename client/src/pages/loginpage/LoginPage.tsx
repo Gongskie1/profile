@@ -1,9 +1,23 @@
 import { Link } from "react-router-dom"
-import { CustomButton, CustomInput } from "../../components"
+import { CustomButton, CustomInput } from "../../components";
+import useCustomFormik from "./utils/Formik_Yup.ts";
+import { initialValuesTypes, onSubmitType } from "../../types/index.ts";
 
 const LoginPage = () => {
+  const initialValues:initialValuesTypes =  {
+    username: "",
+    password: ""
+  }
+
+
+  const onSubmit: onSubmitType = (values: string) => {
+    // Perform some operation with values
+    return values; // Assuming you want onSubmit to return a string
+  };
+  const formik = useCustomFormik(initialValues,onSubmit);
   return (
     <>
+    {/* {formik} */}
       <div className="h-screen w-screen bg-[#DBF9D8] flex items-center justify-center"> 
         <div className="max-w-sm text-[#124975] w-full h-full flex flex-col py-6">
           <h1 className="text-center text-xl font-medium pb-10 ">Login Page</h1>
