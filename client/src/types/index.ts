@@ -1,11 +1,13 @@
+import { FieldInputProps } from "formik";
 
-export interface CustomInputType{
+export type CustomInputType={
     inputTitle:string;
-    inputName:string;
+    inputId:string;
     inputClass:string;
+    boilerPlate: FieldInputProps<string>;
 }
 
-export interface CustomButtonTypes{
+export type CustomButtonTypes = {
     btnName:string;
     btnClass:string;
     btnType: "button" | "submit"

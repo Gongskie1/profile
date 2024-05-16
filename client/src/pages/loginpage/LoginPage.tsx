@@ -12,14 +12,10 @@ const LoginPage = () => {
 
 
   const onSubmit = (values:initialValuesTypes) => {
-    console.log("ulol")
-    console.log(values)
-    
+    console.log(values);
   };
   const {
-    // values,
-    // handleBlur,
-    // handleChange, 
+    getFieldProps,
     handleSubmit} = useCustomFormik(initialValues,onSubmit);
 
   return (
@@ -31,16 +27,20 @@ const LoginPage = () => {
           <div className=" h-full flex flex-col  rounded-md">
             
             <form onSubmit={handleSubmit}>
-              <CustomInput 
-                inputName={"username"} 
+              <CustomInput
+                inputId = {"username"}
                 inputClass={""} 
                 inputTitle={"Username"}
+                boilerPlate={getFieldProps('username')}
               />
+
               <CustomInput 
-                inputName={"password"} 
-                inputClass={""} 
-                inputTitle={"Password"}
-              />
+                inputId = {"username"}
+                inputClass={""}
+                inputTitle={"Password"} 
+                boilerPlate={getFieldProps('password')}
+                />
+
               <CustomButton 
               btnName={"Login"}
               btnType="submit"
