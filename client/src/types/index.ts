@@ -1,4 +1,3 @@
-import { FormikHelpers } from "formik/dist/types";
 
 export interface CustomInputType{
     inputTitle:string;
@@ -9,14 +8,13 @@ export interface CustomInputType{
 export interface CustomButtonTypes{
     btnName:string;
     btnClass:string;
+    btnType: "button" | "submit"
 }
 
 export type initialValuesTypes = {
-    username?:string;
-    password?:string;
+    username:string;
+    password:string;
 }
 
-export type onSubmitType = (
-    values: initialValuesTypes,
-    formikHelpers: FormikHelpers<initialValuesTypes>
-  ) => void | Promise<string>;
+
+export type onSubmitType = (values: initialValuesTypes) => void;

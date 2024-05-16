@@ -3,14 +3,14 @@ import { initialValuesTypes, onSubmitType } from "../../../types";
 
 const useCustomFormik = (
     initialValues: initialValuesTypes, 
-    onSubmitCallback:onSubmitType
+    onSubmit:onSubmitType
     
 ) =>
     {
         
     const formik =useFormik({
         initialValues:initialValues,
-        onSubmit:onSubmitCallback
+        onSubmit:onSubmit
     })
     return formik
 }

@@ -3,6 +3,7 @@ import { CustomButtonTypes } from "../types"
 const Button = ({
 btnName,
 btnClass,
+btnType
 }:CustomButtonTypes
 ) => {
   return (
@@ -10,6 +11,7 @@ btnClass,
       <div>
         <button 
           className={btnClass}
+          type={btnType}
           >{btnName}
         </button>
       </div>
