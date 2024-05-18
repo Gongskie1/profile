@@ -14,8 +14,10 @@ export type CustomButtonTypes = {
 }
 
 export type initialValuesTypes = {
+    email?:string;
     username:string;
     password:string;
+    displayName?:string;
 }
 
 

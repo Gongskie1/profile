@@ -5,10 +5,11 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import passport from "passport";
 import routes from "./controller/routes/index.js"
-
+import cors from 'cors';
 const app = express();
 const port = process.env.PORT;
 
+app.use(cors());
 app.use(session(
     {
         secret: "practicemore",

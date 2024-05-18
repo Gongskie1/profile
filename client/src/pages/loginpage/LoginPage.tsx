@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { CustomButton, CustomInput } from "../../components";
-import useCustomFormik from "./utils/Formik_Yup.ts";
+import useCustomFormik from "../utils/Formik_Yup.ts";
+import {login} from "../utils/RestApi.ts"
 import { initialValuesTypes } from "../../types/index.ts";
 
 
@@ -12,7 +13,7 @@ const LoginPage = () => {
 
 
   const onSubmit = (values:initialValuesTypes) => {
-    console.log(values);
+    login(values)
   };
   const {
     getFieldProps,

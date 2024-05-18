@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { initialValuesTypes, onSubmitType } from "../../../types";
+import { initialValuesTypes, onSubmitType } from "../../types";
 
 const useCustomFormik = (
     initialValues: initialValuesTypes, 
