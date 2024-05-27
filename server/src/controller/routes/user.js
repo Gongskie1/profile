@@ -6,7 +6,11 @@ import passport_local_strat from "../../passport_auth/passport_local_strat.js";
 router.post(
     "/login",
     passport_local_strat.authenticate("local"),
-    userController.create
+    userController.login
+)
+router.post(
+    "/create-account",
+    userController.register
 )
 router.get(
     "/home", userController.getting

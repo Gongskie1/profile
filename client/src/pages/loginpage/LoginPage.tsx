@@ -3,18 +3,34 @@ import { CustomButton, CustomInput } from "../../components";
 import useCustomFormik from "../utils/Formik_Yup.ts";
 import {login} from "../utils/RestApi.ts"
 import { initialValuesTypes } from "../../types/index.ts";
-
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const initialValues:initialValuesTypes =  {
     username: "",
     password: ""
   }
 
 
-  const onSubmit = (values:initialValuesTypes) => {
-    login(values)
-  };
+  const onSubmit = async (values: initialValuesTypes) => {
+    try {
+        const credentials = await login(values);
+
+        if (credentials.message) {
+            if (credentials.data) {
+                navigate('/homepage');
+            } else {
+                alert('Incorrect username or password');
+            }
+        } else {
+            alert('Incorrect username or password');
+        }
+    } catch (error) {
+        console.error('Login failed:', error);
+    }
+};
   const {
     getFieldProps,
     handleSubmit} = useCustomFormik(initialValues,onSubmit);

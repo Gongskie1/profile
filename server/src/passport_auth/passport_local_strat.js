@@ -30,15 +30,15 @@ passport.deserializeUser(async (id,done)=>{
 export default passport.use(
     new Strategy(async(username,password,done)=>{
         try {
-            const findUser = await User.findOne({where: {username:username}});        
+            const findUser = await User.findOne({where: {username:username,password:password}});        
             if(!findUser){
                 throw new Error("wrong credentials");
             }
             // console.log(findUser);
-            done(null,findUser)
+            return done(null,findUser)
         } catch (error) {
             console.log(`Error: ${error}`)
-            done(error,null)
+            return done(error,null)
         }
 
     })
