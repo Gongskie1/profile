@@ -20,7 +20,7 @@ export default {
             return res.json({
                 data:req.user,
                 message: true
-            });
+            }); 
         } catch (error) {
             console.error('Error creating user:', error);
             return res.status(500).json({ message: 'Internal server error' });
