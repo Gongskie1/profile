@@ -14,13 +14,14 @@ export default {
             if(!findUser){
                 console.log(`user is not found`);
                 return res.status(400).json({ 
+                    data:{},
                     message: false
                  });
             }
             return res.json({
                 data:req.user,
                 message: true
-            }); 
+            });
         } catch (error) {
             console.error('Error creating user:', error);
             return res.status(500).json({ message: 'Internal server error' });
