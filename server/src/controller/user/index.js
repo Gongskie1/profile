@@ -9,21 +9,13 @@ const User = model(connection,DataTypes);
 export default {
     login: async (req,res) => {
         try {
-            const {username,password} = req.body;
-            const findUser = await User.findOne({where:{ username:username, password:password}})
-            if(!findUser){
-                console.log(`user is not found`);
-                return res.status(400).json({ 
-                    data:{},
-                    message: false
-                 });
-            }
-            return res.json({
-                data:req.user,
-                message: true
+            // If authentication is successful
+            return res.status(200).json({
+                data: req.user,
+                message: 'Login successful'
             });
         } catch (error) {
-            console.error('Error creating user:', error);
+            console.error('Error during login process:', error);
             return res.status(500).json({ message: 'Internal server error' });
         }
     },
