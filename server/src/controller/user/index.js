@@ -1,17 +1,20 @@
 import model  from "../../../models/user.cjs";
 import connection from "../../mysql/connection.js";
-import { DataTypes,Op } from "sequelize";
+import { DataTypes } from "sequelize";
 
 
 const User = model(connection,DataTypes);
 
 
 export default {
-    login: async (req,res) => {
+    login: async (req,res,err) => {
         try {
-            // If authentication is successful
+            if (!err) {
+                return res.status(401).json({ status: false, message: err });
+            }
+            
             return res.status(200).json({
-                data: req.user,
+                status: true,
                 message: 'Login successful'
             });
         } catch (error) {

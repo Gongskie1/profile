@@ -10,12 +10,12 @@ const customAuthenticate = (req, res, next) => {
         }
         if (!user) {
             // Authentication failed, send custom error message
-            return res.status(401).json({ message: info.message });
+            return res.status(401).json({ status:false,message: info.message });
         }
         req.logIn(user, (err) => {
             if (err) {
                 // An error occurred during the login process
-                return next(err); // Propagate error to centralized handler
+                return next(err); 
             }
             // Authentication and login successful, proceed to the next middleware
             return next();

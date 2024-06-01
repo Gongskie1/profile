@@ -17,17 +17,15 @@ const LoginPage = () => {
   const onSubmit = async (values: initialValuesTypes) => {
     try {
         const credentials = await login(values);
-
-        if (credentials.message) {
-            if (credentials.data) {
-                navigate('/homepage');
-            } else {
-                alert('Incorrect username or password');
-            }
-        } else {
-            alert('Incorrect username or password');
+        console.log('Credentials:', credentials);
+        if (credentials.status) {
+            console.log(credentials.message, "Login successful");
+            alert("Welcome!");
+            navigate("/homepage");
         }
     } catch (error) {
+        alert("Login failed");
+        navigate("/");
         console.error('Login failed:', error);
     }
 };

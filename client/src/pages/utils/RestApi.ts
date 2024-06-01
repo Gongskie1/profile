@@ -5,27 +5,19 @@ import { initialValuesTypes } from "../../types";
 const loginUri = "http://localhost:8080/login";
 const registerUri = "http://localhost:8080/create-account";
 type User  = {
-    data?:{
-        id:number;
-        email:string
-        username:string;
-        password:string;
-        display_name:string
-    },
-    message:boolean
+    status:boolean;
+    message:string;
 }
+
+
 
 export const login = async (values: initialValuesTypes): Promise<User> => {
     try {
         const response = await axios.post<User>(loginUri, values);
-        if (response.status === 200) {
-            return response.data;
-        } else {
-            throw new Error('Unexpected response status: ' + response.status);
-        }
+        return response.data;
     } catch (error) {
-        console.error('Error:', error);
-        throw new Error('Login failed');
+        console.log('Login failed:', error);
+        throw new Error('Login failedsssss');
     }
 };
 
