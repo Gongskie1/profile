@@ -10,14 +10,19 @@ type User  = {
 }
 
 
-
 export const login = async (values: initialValuesTypes): Promise<User> => {
     try {
         const response = await axios.post<User>(loginUri, values);
         return response.data;
     } catch (error) {
-        console.log('Login failed:', error);
-        throw new Error('Login failedsssss');
+        if (axios.isAxiosError(error) && error.response) {
+            
+            console.log('Login failed rest api:', error.response.data);
+            throw error.response.data.status; 
+        } else {
+            console.log('Login failed:', error);
+            throw new Error('Login failed');
+        }
     }
 };
 

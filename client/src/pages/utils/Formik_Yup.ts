@@ -1,8 +1,9 @@
 import { useFormik } from "formik";
-import { initialValuesTypes, onSubmitType } from "../../types";
+import { initialValuesTypes, onSubmitType,loginSchemaType } from "../../types";
 
 const useCustomFormik = (
-    initialValues: initialValuesTypes, 
+    initialValues: initialValuesTypes,
+    validationSchema:loginSchemaType,
     onSubmit:onSubmitType
     
 ) =>
@@ -10,6 +11,7 @@ const useCustomFormik = (
         
     const formik =useFormik({
         initialValues:initialValues,
+        validationSchema:validationSchema,
         onSubmit:onSubmit
     })
     return formik

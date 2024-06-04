@@ -4,9 +4,19 @@ import useCustomFormik from "../utils/Formik_Yup.ts";
 import {login} from "../utils/RestApi.ts"
 import { initialValuesTypes } from "../../types/index.ts";
 import { useNavigate } from "react-router-dom";
+import loginSchema from "../schema/login.ts";
+// import axios from "axios";
+import { useState } from "react";
+
 
 const LoginPage = () => {
+  interface ResponseType{
+    status:boolean;
+    message:string;
+  }
+  const [response, setReponse] = useState<ResponseType>({status:false,message:""})
   const navigate = useNavigate();
+  
 
   const initialValues:initialValuesTypes =  {
     username: "",
@@ -19,19 +29,26 @@ const LoginPage = () => {
         const credentials = await login(values);
         console.log('Credentials:', credentials);
         if (credentials.status) {
-            console.log(credentials.message, "Login successful");
+            console.log(credentials, "Login successful");
             alert("Welcome!");
             navigate("/homepage");
         }
     } catch (error) {
         alert("Login failed");
         navigate("/");
-        console.error('Login failed:', error);
+        if (error === false){
+          console.log("Tang ina nyo")
+        }else{
+          console.log("mas putang ina ka")
+        }
+          
     }
 };
   const {
     getFieldProps,
-    handleSubmit} = useCustomFormik(initialValues,onSubmit);
+    touched,
+    errors,
+    handleSubmit} = useCustomFormik(initialValues,loginSchema,onSubmit);
 
   return (
     <>
@@ -46,8 +63,11 @@ const LoginPage = () => {
                 inputId = {"username"}
                 inputClass={""} 
                 inputTitle={"Username"}
-                boilerPlate={getFieldProps('username')}
+                boilerPlate={getFieldProps('username')
+
+                }
               />
+              {touched.username && errors.username && <div>{errors.username}</div>}
 
               <CustomInput 
                 inputId = {"username"}
@@ -55,6 +75,7 @@ const LoginPage = () => {
                 inputTitle={"Password"} 
                 boilerPlate={getFieldProps('password')}
                 />
+              {touched.password && errors.password && <div>{errors.password}</div>}
 
               <CustomButton 
               btnName={"Login"}

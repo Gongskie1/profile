@@ -1,8 +1,9 @@
 import { FieldInputProps } from "formik";
+import { ObjectSchema } from "yup";
 
 export type CustomInputType={
     inputTitle:string;
-    inputId:string;
+    inputId?:string;
     inputClass:string;
     boilerPlate: FieldInputProps<string>;
 }
@@ -22,3 +23,15 @@ export type initialValuesTypes = {
 
 
 export type onSubmitType = (values: initialValuesTypes) => void;
+
+interface User {
+    username:string;
+    password:string
+}
+
+export type loginSchemaType = ObjectSchema<User>;
+
+
+// export interface errors {
+//     error:
+// }

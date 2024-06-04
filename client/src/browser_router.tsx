@@ -1,25 +1,31 @@
 import { createBrowserRouter } from "react-router-dom";
 import {
-    HomePage,
     LoginPage,
     RegisterPage,
-
+    HomePage // Make sure to import your HomePage component
 } from "./pages/index.ts";
+import ProtectedRoutes from "./pages/utils/ProtectedRoutes.tsx";
 
-
-const  router = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: "/",
-        element: <LoginPage/>
+        element: <ProtectedRoutes />,
+        children: [
+            
+            {
+                path: "home",
+                element: <HomePage />
+            }
+        ],
     },
     {
-        path:"/register",
-        element: <RegisterPage/>
+        path: "register",
+        element: <RegisterPage />
     },
     {
-        path:"/homepage",
-        element: <HomePage/>
-    }
-])
+        path: "/login",
+        element: <LoginPage />
+    },
+]);
 
 export default router;
