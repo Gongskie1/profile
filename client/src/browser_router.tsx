@@ -9,17 +9,16 @@ import ProtectedRoutes from "./pages/utils/ProtectedRoutes.tsx";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <ProtectedRoutes />,
+        element: <ProtectedRoutes />, // Protected Routes Wrapper
         children: [
-            
-            {
-                path: "home",
-                element: <HomePage />
-            }
+          {
+            path: "/",
+            element: <HomePage />,
+          },
         ],
-    },
+      },
     {
-        path: "register",
+        path: "/register",
         element: <RegisterPage />
     },
     {

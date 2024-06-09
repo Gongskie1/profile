@@ -1,9 +1,11 @@
-import { Outlet, Navigate } from "react-router-dom";
+// src/pages/utils/ProtectedRoutes.tsx
+import useAuth from './context-api/useAuth';
+import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoutes = () => {
-    const isAuthenticated = false;
-    
-    return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
-}
+  const { isAuthenticated } = useAuth();
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+};
 
 export default ProtectedRoutes;

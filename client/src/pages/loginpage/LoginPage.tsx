@@ -3,21 +3,14 @@ import { CustomButton, CustomInput } from "../../components";
 import useCustomFormik from "../utils/Formik_Yup.ts";
 import {login} from "../utils/RestApi.ts"
 import { initialValuesTypes } from "../../types/index.ts";
-import { useNavigate } from "react-router-dom";
 import loginSchema from "../schema/login.ts";
-// import axios from "axios";
-import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import useAuth from "../utils/context-api/useAuth.tsx";
 
 const LoginPage = () => {
-  interface ResponseType{
-    status:boolean;
-    message:string;
-  }
-  const [response, setReponse] = useState<ResponseType>({status:false,message:""})
-  const navigate = useNavigate();
-  
+  const {isAuthenticated, setIsAuthenticated } = useAuth();
 
+  const navigate = useNavigate();
   const initialValues:initialValuesTypes =  {
     username: "",
     password: ""
@@ -26,24 +19,18 @@ const LoginPage = () => {
 
   const onSubmit = async (values: initialValuesTypes) => {
     try {
-        const credentials = await login(values);
-        console.log('Credentials:', credentials);
-        if (credentials.status) {
-            console.log(credentials, "Login successful");
-            alert("Welcome!");
-            navigate("/homepage");
-        }
+      const credentials = await login(values);
+      console.log('Credentials:', credentials);
+      if (credentials.status) {
+        alert('Login successful!'+isAuthenticated);
+        setIsAuthenticated(true)
+        navigate("/")
+      }
     } catch (error) {
-        alert("Login failed");
-        navigate("/");
-        if (error === false){
-          console.log("Tang ina nyo")
-        }else{
-          console.log("mas putang ina ka")
-        }
-          
+      alert('Login failed' + error);
+      console.error('Login error:',isAuthenticated);
     }
-};
+  };
   const {
     getFieldProps,
     touched,
@@ -52,7 +39,6 @@ const LoginPage = () => {
 
   return (
     <>
-    {/* {formik} */}
       <div className="h-screen w-screen bg-[#DBF9D8] flex items-center justify-center"> 
         <div className="max-w-sm text-[#5d5e5f] w-full h-full flex flex-col py-6">
           <h1 className="text-center text-xl font-medium pb-10 ">Login Page</h1>
@@ -63,9 +49,7 @@ const LoginPage = () => {
                 inputId = {"username"}
                 inputClass={""} 
                 inputTitle={"Username"}
-                boilerPlate={getFieldProps('username')
-
-                }
+                boilerPlate={getFieldProps('username')}
               />
               {touched.username && errors.username && <div>{errors.username}</div>}
 
